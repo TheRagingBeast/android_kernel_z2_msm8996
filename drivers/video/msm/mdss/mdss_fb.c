@@ -3818,6 +3818,14 @@ static int __mdss_fb_display_thread(void *data)
 				(atomic_read(&mfd->commits_pending) ||
 				 kthread_should_stop()));
 
+<<<<<<< HEAD
+=======
+		if (ret) {
+			pr_info("%s: interrupted", __func__);
+			continue;
+		}
+
+>>>>>>> 80fad60... msm: Fix high load average from uninterruptible waits
 		if (kthread_should_stop())
 			break;
 
