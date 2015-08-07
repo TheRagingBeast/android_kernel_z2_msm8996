@@ -681,8 +681,8 @@ static void input_dev_release_keys(struct input_dev *dev)
 			input_pass_event(dev, EV_SYN, SYN_REPORT, 1);
 
 		memset(dev->key, 0, sizeof(dev->key));
-	}
-}
+			}
+		}
 
 /*
  * Prepare device for unregistering
