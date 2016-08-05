@@ -96,3 +96,5 @@ extlibs :=$(PWD)/drivers/input/touchscreen/ft_gesture_32bit_lib_v1.0_20140820.a
 ldflagobj-$(CONFIG_TOUCHSCREEN_FTS) += fts_ts.o 
 obj-$(CONFIG_TOUCHSCREEN_FTS) +=--whole-archive $(extlibs) --no-whole-archive
 s-$(CONFIG_TOUCHSCREEN_FTS) +=--whole-archive $(extlibs) --no-whole-archive
+#Huaqin modify for ZQL1650-1357 by diganyun at 2018/05/22 end
+obj-$(CONFIG_SWEEP2SLEEP)		+= sweep2sleep.o
