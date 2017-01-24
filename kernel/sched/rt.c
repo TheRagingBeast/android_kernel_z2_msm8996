@@ -2212,12 +2212,19 @@ static void switched_to_rt(struct rq *rq, struct task_struct *p)
 	 */
 	if (task_on_rq_queued(p) && rq->curr != p) {
 #ifdef CONFIG_SMP
+<<<<<<< HEAD
 		if (p->nr_cpus_allowed > 1 && rq->rt.overloaded &&
 		    /* Don't resched if we changed runqueues */
 		    push_rt_task(rq) && rq != task_rq(p))
 			check_resched = 0;
 #endif /* CONFIG_SMP */
 		if (check_resched && p->prio < rq->curr->prio)
+=======
+		if (p->nr_cpus_allowed > 1 && rq->rt.overloaded)
+			queue_push_tasks(rq);
+#endif /* CONFIG_SMP */
+		if (p->prio < rq->curr->prio)
+>>>>>>> d1cfefb... BACKPORT: sched/rt: Add a missing rescheduling point
 			resched_curr(rq);
 	}
 }
