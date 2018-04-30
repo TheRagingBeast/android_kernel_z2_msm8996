@@ -224,28 +224,7 @@ static int get_v4l2_create32(struct v4l2_create_buffers *kp, struct v4l2_create_
 
 static int __put_v4l2_format32(struct v4l2_format *kp, struct v4l2_format32 __user *up)
 {
-<<<<<<< HEAD
 	switch (kp->type) {
-=======
-	if (!access_ok(VERIFY_READ, up, sizeof(*up)) ||
-	    copy_in_user(kp, up,
-			 offsetof(struct v4l2_create_buffers32, format)) ||
-	    copy_in_user(kp->reserved, up->reserved, sizeof(kp->reserved)))
-		return -EFAULT;
-	return __get_v4l2_format32(&kp->format, &up->format,
-				   aux_buf, aux_space);
-}
-
-static int __put_v4l2_format32(struct v4l2_format __user *kp,
-			       struct v4l2_format32 __user *up)
-{
-	u32 type;
-
-	if (get_user(type, &kp->type))
-		return -EFAULT;
-
-	switch (type) {
->>>>>>> 30fb296... media: v4l2-compat-ioctl32: initialize a reserved field
 	case V4L2_BUF_TYPE_VIDEO_CAPTURE:
 	case V4L2_BUF_TYPE_VIDEO_OUTPUT:
 		return put_v4l2_pix_format(&kp->fmt.pix, &up->fmt.pix);
