@@ -375,7 +375,6 @@ is not associated with a file:
 
  or if empty, the mapping is anonymous.
 
-<<<<<<< HEAD
 The /proc/PID/task/TID/maps is a view of the virtual memory from the viewpoint
 of the individual tasks of a process. In this file you will see a mapping marked
 as [stack] if that task sees it as a stack. This is a key difference from the
@@ -404,8 +403,6 @@ a8044000-a8045000 rw-p 0001c000 03:00 8317       /lib/ld-linux.so.2
 aff35000-aff4a000 rw-p 00000000 00:00 0
 ffffe000-fffff000 r-xp 00000000 00:00 0          [vdso]
 
-=======
->>>>>>> ddc867c... fs/proc: Stop trying to report thread stacks
 The /proc/PID/smaps is an extension based on maps, showing the memory
 consumption for each of the process's mappings. For each of mappings there
 is a series of lines such as the following:

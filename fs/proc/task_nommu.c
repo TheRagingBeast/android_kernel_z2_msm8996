@@ -123,7 +123,6 @@ unsigned long task_statm(struct mm_struct *mm,
 	return size;
 }
 
-<<<<<<< HEAD
 static pid_t pid_of_stack(struct proc_maps_private *priv,
 				struct vm_area_struct *vma, bool is_pid)
 {
@@ -141,20 +140,6 @@ static pid_t pid_of_stack(struct proc_maps_private *priv,
 	rcu_read_unlock();
 
 	return ret;
-=======
-static int is_stack(struct proc_maps_private *priv,
-		    struct vm_area_struct *vma)
-{
-	struct mm_struct *mm = vma->vm_mm;
-
-	/*
-	 * We make no effort to guess what a given thread considers to be
-	 * its "stack".  It's not even well-defined for programs written
-	 * languages like Go.
-	 */
-	return vma->vm_start <= mm->start_stack &&
-		vma->vm_end >= mm->start_stack;
->>>>>>> ddc867c... fs/proc: Stop trying to report thread stacks
 }
 
 /*
@@ -196,7 +181,6 @@ static int nommu_vma_show(struct seq_file *m, struct vm_area_struct *vma,
 	if (file) {
 		seq_pad(m, ' ');
 		seq_path(m, &file->f_path, "");
-<<<<<<< HEAD
 	} else if (mm) {
 		pid_t tid = pid_of_stack(priv, vma, is_pid);
 
@@ -212,11 +196,6 @@ static int nommu_vma_show(struct seq_file *m, struct vm_area_struct *vma,
 			else
 				seq_printf(m, "[stack:%d]", tid);
 		}
-=======
-	} else if (mm && is_stack(priv, vma)) {
-		seq_pad(m, ' ');
-		seq_printf(m, "[stack]");
->>>>>>> ddc867c... fs/proc: Stop trying to report thread stacks
 	}
 
 	seq_putc(m, '\n');
