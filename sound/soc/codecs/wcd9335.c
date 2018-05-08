@@ -13147,7 +13147,7 @@ static struct kobj_attribute earpiece_gain_attribute =
 static ssize_t speaker_gain_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return snprintf(buf, PAGE_SIZE, "%d %d\n",
+	return snprintf(buf, PAGE_SIZE, "%d\n",
 		snd_soc_read(sound_control_codec_ptr, WCD9335_CDC_RX1_RX_VOL_CTL),
 		snd_soc_read(sound_control_codec_ptr, WCD9335_CDC_RX7_RX_VOL_CTL)
 	);
