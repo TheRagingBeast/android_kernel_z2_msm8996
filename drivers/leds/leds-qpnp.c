@@ -2362,8 +2362,7 @@ static ssize_t pause_lo_store(struct device *dev,
 		return ret;
 	led = container_of(led_cdev, struct qpnp_led_data, cdev);
 
-	if (check_for_notification_led(led_cdev))
-		pause_lo = convert_pause_lo_store(pause_lo);
+	pause_lo = convert_pause_lo_store(pause_lo);
 
 	switch (led->id) {
 	case QPNP_ID_LED_MPP:
