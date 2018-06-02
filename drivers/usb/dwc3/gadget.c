@@ -625,6 +625,13 @@ static void dwc3_remove_requests(struct dwc3 *dwc, struct dwc3_ep *dep)
 
 			dwc3_gadget_giveback(dep, req, -ESHUTDOWN);
 		}
+<<<<<<< HEAD
+=======
+	/* For isoc endpoints explicitly stop active transfers */
+	} else if (dep->endpoint.desc &&
+		usb_endpoint_xfer_isoc(dep->endpoint.desc)) {
+		dwc3_stop_active_transfer(dwc, dep->number, true);
+>>>>>>> afd49d2cefb5a6bba6cb69d4ddfd63e6d66a8c08
 	}
 
 	while (!list_empty(&dep->request_list)) {

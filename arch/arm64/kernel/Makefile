@@ -14,18 +14,19 @@ CFLAGS_REMOVE_insn.o = -pg
 CFLAGS_REMOVE_return_address.o = -pg
 
 # Object file lists.
-arm64-obj-y		:= cputable.o debug-monitors.o entry.o irq.o fpsimd.o	\
+arm64-obj-y		:= debug-monitors.o entry.o irq.o fpsimd.o		\
 			   entry-fpsimd.o process.o ptrace.o setup.o signal.o	\
 			   sys.o stacktrace.o time.o traps.o io.o vdso.o	\
 			   hyp-stub.o psci.o psci-call.o cpu_ops.o insn.o	\
-			   return_address.o cpuinfo.o cpu_errata.o cpufeature.o alternative.o
+			   return_address.o cpuinfo.o cpu_errata.o		\
+			   cpufeature.o alternative.o		\
+			   smp.o smp_spin_table.o topology.o
 
 arm64-obj-$(CONFIG_COMPAT)		+= sys32.o kuser32.o signal32.o 	\
 					   sys_compat.o				\
 					   ../../arm/kernel/opcodes.o
 arm64-obj-$(CONFIG_FUNCTION_TRACER)	+= ftrace.o entry-ftrace.o
 arm64-obj-$(CONFIG_MODULES)		+= arm64ksyms.o module.o
-arm64-obj-$(CONFIG_SMP)			+= smp.o smp_spin_table.o topology.o
 arm64-obj-$(CONFIG_PERF_EVENTS)		+= perf_regs.o
 arm64-obj-$(CONFIG_HW_PERF_EVENTS)	+= perf_event.o perf_debug.o 		\
 					   perf_trace_counters.o 		\
@@ -41,10 +42,13 @@ arm64-obj-$(CONFIG_ARMV8_DEPRECATED)	+= armv8_deprecated.o
 arm64-obj-$(CONFIG_MSM_APP_API)		+= app_api.o
 arm64-obj-$(CONFIG_MSM_APP_SETTINGS)	+= app_setting.o
 
+<<<<<<< HEAD
 obj-y +=alucard_hotplug.o
 obj-y +=autosmp.o
 obj-y +=thunderplug_quad.o
 
+=======
+>>>>>>> afd49d2cefb5a6bba6cb69d4ddfd63e6d66a8c08
 ifeq ($(CONFIG_KVM),y)
 arm64-obj-$(CONFIG_HARDEN_BRANCH_PREDICTOR)	+= bpi.o
 endif
