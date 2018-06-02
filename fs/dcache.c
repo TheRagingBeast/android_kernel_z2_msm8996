@@ -269,33 +269,6 @@ static inline int dname_external(const struct dentry *dentry)
 	return dentry->d_name.name != dentry->d_iname;
 }
 
-void take_dentry_name_snapshot(struct name_snapshot *name, struct dentry *dentry)
-{
-	spin_lock(&dentry->d_lock);
-	if (unlikely(dname_external(dentry))) {
-		struct external_name *p = external_name(dentry);
-		atomic_inc(&p->u.count);
-		spin_unlock(&dentry->d_lock);
-		name->name = p->name;
-	} else {
-		memcpy(name->inline_name, dentry->d_iname, DNAME_INLINE_LEN);
-		spin_unlock(&dentry->d_lock);
-		name->name = name->inline_name;
-	}
-}
-EXPORT_SYMBOL(take_dentry_name_snapshot);
-
-void release_dentry_name_snapshot(struct name_snapshot *name)
-{
-	if (unlikely(name->name != name->inline_name)) {
-		struct external_name *p;
-		p = container_of(name->name, struct external_name, name[0]);
-		if (unlikely(atomic_dec_and_test(&p->u.count)))
-			kfree_rcu(p, u.head);
-	}
-}
-EXPORT_SYMBOL(release_dentry_name_snapshot);
-
 static void dentry_free(struct dentry *dentry)
 {
 	WARN_ON(!hlist_unhashed(&dentry->d_u.d_alias));
@@ -1899,28 +1872,6 @@ static struct dentry * __d_find_any_alias(struct inode *inode)
 	__dget(alias);
 	return alias;
 }
-
-/*
- * This should be equivalent to d_instantiate() + unlock_new_inode(),
- * with lockdep-related part of unlock_new_inode() done before
- * anything else.  Use that instead of open-coding d_instantiate()/
- * unlock_new_inode() combinations.
- */
-void d_instantiate_new(struct dentry *entry, struct inode *inode)
-{
-	BUG_ON(!hlist_unhashed(&entry->d_u.d_alias));
-	BUG_ON(!inode);
-	lockdep_annotate_inode_mutex_key(inode);
-	security_d_instantiate(entry, inode);
-	spin_lock(&inode->i_lock);
-	__d_instantiate(entry, inode);
-	WARN_ON(!(inode->i_state & I_NEW));
-	inode->i_state &= ~I_NEW;
-	smp_mb();
-	wake_up_bit(&inode->i_state, __I_NEW);
-	spin_unlock(&inode->i_lock);
-}
-EXPORT_SYMBOL(d_instantiate_new);
 
 /**
  * d_find_any_alias - find any alias for a given inode

@@ -556,10 +556,6 @@ static struct msm_soc_info cpu_of_id[] = {
 	[293] = {MSM_CPU_8953, "MSM8953"},
 	[304] = {MSM_CPU_8953, "APQ8053"},
 
-	/* SDM450 ID */
-	[338] = {MSM_CPU_SDM450, "SDM450"},
-	[351] = {MSM_CPU_SDM450, "SDA450"},
-
 	/* 9607 IDs */
 	[290] = {MSM_CPU_9607, "MDM9607"},
 	[296] = {MSM_CPU_9607, "MDM8207"},

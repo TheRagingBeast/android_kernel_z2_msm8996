@@ -31,10 +31,7 @@
 #include <asm/mmu.h>
 #include <asm/ptrace.h>
 #include <asm/thread_info.h>
-<<<<<<< HEAD
-=======
 #include <asm/uaccess.h>
->>>>>>> afd49d2cefb5a6bba6cb69d4ddfd63e6d66a8c08
 #include <asm/asm-uaccess.h>
 #include <asm/unistd.h>
 
