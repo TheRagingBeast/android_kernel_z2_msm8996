@@ -84,15 +84,11 @@ static ssize_t rsc_ops_write(struct file *fp, const char __user *user_buffer,
 
 	for (i = 0; i < nelems; i++) {
 		cmp += pos;
-<<<<<<< HEAD
-		sscanf(cmp, "%5s %n", key_str, &pos);
-=======
 		if (sscanf(cmp, "%5s %n", key_str, &pos) != 1) {
 			pr_err("Invalid number of arguments passed\n");
 			goto err_request;
 		}
 
->>>>>>> 56b8cb508071180920f55f717e4f809f226d64be
 		if (strlen(key_str) > 4) {
 			pr_err("Key value cannot be more than 4 charecters");
 			goto err_request;
@@ -104,15 +100,12 @@ static ssize_t rsc_ops_write(struct file *fp, const char __user *user_buffer,
 		}
 
 		cmp += pos;
-<<<<<<< HEAD
-		sscanf(cmp, "%u %n", &data, &pos);
-=======
+
 		if (sscanf(cmp, "%u %n", &data, &pos) != 1) {
 			pr_err("Invalid number of arguments passed\n");
 			goto err_request;
 		}
 
->>>>>>> 56b8cb508071180920f55f717e4f809f226d64be
 		if (msm_rpm_add_kvp_data(req, key,
 				(void *)&data, sizeof(data)))
 			goto err_request;

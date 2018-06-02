@@ -1258,12 +1258,8 @@ static int32_t msm_actuator_set_param(struct msm_actuator_ctrl_t *a_ctrl,
 
 	if (copy_from_user(&a_ctrl->region_params,
 		(void *)set_info->af_tuning_params.region_params,
-<<<<<<< HEAD
-		a_ctrl->region_size * sizeof(struct region_params_t)))
-=======
 		a_ctrl->region_size * sizeof(struct region_params_t))) {
 		pr_err("Error copying region_params\n");
->>>>>>> 56b8cb508071180920f55f717e4f809f226d64be
 		return -EFAULT;
 
 	if (a_ctrl->act_device_type == MSM_CAMERA_PLATFORM_DEVICE) {

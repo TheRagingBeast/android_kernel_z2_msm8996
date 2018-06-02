@@ -35,13 +35,10 @@
 
 static struct v4l2_device *msm_v4l2_dev;
 static struct list_head    ordered_sd_list;
-<<<<<<< HEAD
-=======
 static struct mutex        ordered_sd_mtx;
 static struct mutex        v4l2_event_mtx;
 
 static struct pm_qos_request msm_v4l2_pm_qos_request;
->>>>>>> 56b8cb508071180920f55f717e4f809f226d64be
 
 static struct msm_queue_head *msm_session_q;
 
@@ -1227,11 +1224,8 @@ static int msm_probe(struct platform_device *pdev)
 	msm_init_queue(msm_session_q);
 	spin_lock_init(&msm_eventq_lock);
 	spin_lock_init(&msm_pid_lock);
-<<<<<<< HEAD
-=======
 	mutex_init(&ordered_sd_mtx);
 	mutex_init(&v4l2_event_mtx);
->>>>>>> 56b8cb508071180920f55f717e4f809f226d64be
 	INIT_LIST_HEAD(&ordered_sd_list);
 
 	cam_debugfs_root = debugfs_create_dir(MSM_CAM_LOGSYNC_FILE_BASEDIR,
