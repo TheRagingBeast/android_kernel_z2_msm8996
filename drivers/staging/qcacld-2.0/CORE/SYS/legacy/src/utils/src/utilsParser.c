@@ -706,8 +706,15 @@ void ConvertQosMapsetFrame(tpAniSirGlobal pMac, tSirQosMapSet* Qos, tDot11fIEQos
     tANI_U8 i,j=0;
     if (dot11fIE->num_dscp_exceptions > 58)
         dot11fIE->num_dscp_exceptions = 58;
+<<<<<<< HEAD
     if (dot11fIE->num_dscp_exceptions < 16)
         return;
+=======
+
+    if (dot11fIE->num_dscp_exceptions < 16)
+	return;
+
+>>>>>>> e6bdcde... qcacld-2.0: Fix misleading indentation warning in ConvertQosMapsetFrame
     Qos->num_dscp_exceptions = (dot11fIE->num_dscp_exceptions - 16)/2;
     for (i = 0; i < Qos->num_dscp_exceptions; i++)
     {
