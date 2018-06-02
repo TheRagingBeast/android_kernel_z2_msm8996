@@ -1442,7 +1442,7 @@ static int fanout_add(struct sock *sk, u16 id, u16 type_flags)
 		break;
 	default:
 		return -EINVAL;
-	}
+       }
 
 	if (po->fanout)
 		goto out;

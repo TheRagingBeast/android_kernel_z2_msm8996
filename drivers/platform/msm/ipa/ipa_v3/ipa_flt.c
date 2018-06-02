@@ -1480,6 +1480,13 @@ int ipa3_add_flt_rule_after(struct ipa_ioc_add_flt_rule_after *rules)
 		goto bail;
 	}
 
+	if (entry->cookie != IPA_FLT_COOKIE) {
+		IPAERR_RL("Invalid cookie value =  %u flt hdl id = %d\n",
+			entry->cookie, rules->add_after_hdl);
+		result = -EINVAL;
+		goto bail;
+	}
+
 	if (entry->tbl != tbl) {
 		IPAERR("given entry does not match the table\n");
 		result = -EINVAL;
