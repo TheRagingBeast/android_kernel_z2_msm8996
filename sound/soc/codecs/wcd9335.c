@@ -4507,27 +4507,11 @@ static int tasha_codec_ear_dac_event(struct snd_soc_dapm_widget *w,
 	case SND_SOC_DAPM_PRE_PMU:
 		if (tasha->anc_func)
 			ret = tasha_codec_enable_anc(w, kcontrol, event);
-		if (!low_distort_amp) {
-			if (!huwifi_mode) {
-				wcd_clsh_fsm(codec, &tasha->clsh_d,
-					WCD_CLSH_EVENT_PRE_DAC,
-					WCD_CLSH_STATE_EAR,
-					CLS_H_NORMAL);
-			}
-			else {
-				wcd_clsh_fsm(codec, &tasha->clsh_d,
-					WCD_CLSH_EVENT_PRE_DAC,
-					WCD_CLSH_STATE_EAR,
-					((hph_mode == CLS_H_LOHIFI) ?
-						CLS_H_HIFI : hph_mode));
-			}
-		}
-		else {
-			wcd_clsh_fsm(codec, &tasha->clsh_d,
-				WCD_CLSH_EVENT_PRE_DAC,
-				WCD_CLSH_STATE_EAR,
-				CLS_AB);
-		}
+
+                wcd_clsh_fsm(codec, &tasha->clsh_d,
+			     WCD_CLSH_EVENT_PRE_DAC,
+			     WCD_CLSH_STATE_EAR,
+			     CLS_H_NORMAL);
 		if (tasha->anc_func)
 			snd_soc_update_bits(codec,
 				WCD9335_CDC_RX0_RX_PATH_CFG0, 0x10, 0x10);
@@ -4538,27 +4522,10 @@ static int tasha_codec_ear_dac_event(struct snd_soc_dapm_widget *w,
 	case SND_SOC_DAPM_PRE_PMD:
 		break;
 	case SND_SOC_DAPM_POST_PMD:
-		if (!low_distort_amp) {
-			if (!huwifi_mode) {
-				wcd_clsh_fsm(codec, &tasha->clsh_d,
-					WCD_CLSH_EVENT_POST_PA,
-					WCD_CLSH_STATE_EAR,
-					CLS_H_NORMAL);
-			}
-			else {
-				wcd_clsh_fsm(codec, &tasha->clsh_d,
-					WCD_CLSH_EVENT_POST_PA,
-					WCD_CLSH_STATE_EAR,
-					((hph_mode == CLS_H_LOHIFI) ?
-						CLS_H_HIFI : hph_mode));
-			}
-		}
-		else {
-			wcd_clsh_fsm(codec, &tasha->clsh_d,
-				WCD_CLSH_EVENT_POST_PA,
-				WCD_CLSH_STATE_EAR,
-				CLS_AB);
-		}
+		wcd_clsh_fsm(codec, &tasha->clsh_d,
+			     WCD_CLSH_EVENT_POST_PA,
+			     WCD_CLSH_STATE_EAR,
+			     CLS_H_NORMAL);
 		break;
 	};
 
