@@ -2214,23 +2214,6 @@ int adm_open(int port_id, int path, int rate, int channel_mode, int topology,
 		(uint32_t)this_adm.outband_memmap.size);
 		}
 	}
-<<<<<<< HEAD
-		if ((topology == ADM_CMD_COPP_OPEN_TOPOLOGY_ID_DTS_HPX) &&
-		    (perf_mode == LEGACY_PCM_MODE)) {
-			int res = 0;
-			atomic_set(&this_adm.mem_map_index, ADM_DTS_EAGLE);
-			msm_dts_ion_memmap(&this_adm.outband_memmap);
-			res = adm_memory_map_regions(
-				      &this_adm.outband_memmap.paddr,
-				      0,
-				      (uint32_t *)&this_adm.outband_memmap.size,
-				      1);
-			if (res < 0)
-				pr_err("%s: DTS_EAGLE mmap did not work!",
-					__func__);
-		}
-=======
->>>>>>> 64d7cb4... ASoC: qdsp6v2: Remove Eagle code
 		open.hdr.hdr_field = APR_HDR_FIELD(APR_MSG_TYPE_SEQ_CMD,
 						   APR_HDR_LEN(APR_HDR_SIZE),
 						   APR_PKT_VER);

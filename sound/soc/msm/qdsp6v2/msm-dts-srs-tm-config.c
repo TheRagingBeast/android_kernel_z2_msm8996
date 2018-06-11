@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /* Copyright (c) 2012-2017, The Linux Foundation. All
-=======
-/* Copyright (c) 2012-2014, 2016-2017, The Linux Foundation. All
->>>>>>> 64d7cb4... ASoC: qdsp6v2: Remove Eagle code
  * rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
