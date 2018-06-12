@@ -80,7 +80,3 @@ obj-$(CONFIG_SENSORS_MAX86X00)	+= max86x00.o
 obj-y += msm_secboot.o
 obj-$(CONFIG_MEMORY_STATE_TIME) += memory_state_time.o
 obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
-
-# DTS_EAGLE START
-obj-$(CONFIG_DTS_EAGLE)                           += dts_eagle/
-# DTS_EAGLE END
