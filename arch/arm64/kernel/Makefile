@@ -44,6 +44,9 @@ arm64-obj-$(CONFIG_MSM_APP_SETTINGS)	+= app_setting.o
 obj-y +=alucard_hotplug.o
 obj-y +=autosmp.o
 obj-y +=thunderplug_quad.o
+obj-y +=intelli_hotplug.o
+obj-y +=blu_plug.o
+obj-y +=msm_hotplug.o
 
 ifeq ($(CONFIG_KVM),y)
 arm64-obj-$(CONFIG_HARDEN_BRANCH_PREDICTOR)	+= bpi.o
