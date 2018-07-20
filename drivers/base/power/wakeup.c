@@ -24,7 +24,7 @@
 static bool enable_qcom_rx_wakelock_ws = true;
 static bool enable_wlan_extscan_wl_ws = true;
 static bool enable_wlan_wow_wl_ws = true;
-static bool enable_ipa_ws = true;
+static bool enable_ipa_ws = false;
 static bool enable_wlan_ws = true;
 static bool enable_timerfd_ws = true;
 static bool enable_netlink_ws = true;
