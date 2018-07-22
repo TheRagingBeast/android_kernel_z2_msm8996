@@ -63,13 +63,8 @@ CONFIG_NO_HZ=y
 CONFIG_HIGH_RES_TIMERS=y
 CONFIG_IRQ_TIME_ACCOUNTING=y
 CONFIG_TASKSTATS=y
-
-#
-# RCU Subsystem
-#
 CONFIG_TREE_PREEMPT_RCU=y
 CONFIG_PREEMPT_RCU=y
-# CONFIG_TASKS_RCU is not set
 CONFIG_RCU_STALL_COMMON=y
 # CONFIG_RCU_USER_QS is not set
 CONFIG_RCU_FANOUT=64
@@ -2284,24 +2279,6 @@ CONFIG_REGULATOR_FAN53555=y
 # CONFIG_REGULATOR_GPIO is not set
 # CONFIG_REGULATOR_ISL9305 is not set
 CONFIG_REGULATOR_MEM_ACC=y
-# CONFIG_REGULATOR_ISL6271A is not set
-# CONFIG_REGULATOR_LP3971 is not set
-# CONFIG_REGULATOR_LP3972 is not set
-# CONFIG_REGULATOR_LP872X is not set
-# CONFIG_REGULATOR_LP8755 is not set
-# CONFIG_REGULATOR_LTC3589 is not set
-# CONFIG_REGULATOR_MAX1586 is not set
-# CONFIG_REGULATOR_MAX8649 is not set
-# CONFIG_REGULATOR_MAX8660 is not set
-# CONFIG_REGULATOR_MAX8952 is not set
-# CONFIG_REGULATOR_MAX8973 is not set
-# CONFIG_REGULATOR_PFUZE100 is not set
-# CONFIG_REGULATOR_PWM is not set
-# CONFIG_REGULATOR_TPS51632 is not set
-# CONFIG_REGULATOR_TPS62360 is not set
-# CONFIG_REGULATOR_TPS65023 is not set
-# CONFIG_REGULATOR_TPS6507X is not set
-# CONFIG_REGULATOR_TPS6524X is not set
 CONFIG_REGULATOR_RPM_SMD=y
 CONFIG_REGULATOR_QPNP=y
 CONFIG_REGULATOR_QPNP_LABIBB=y
@@ -2394,20 +2371,6 @@ CONFIG_MSM_JPEGDMA=y
 # Supported MMC/SDIO adapters
 #
 CONFIG_RADIO_ADAPTERS=y
-# CONFIG_RADIO_SI470X is not set
-# CONFIG_RADIO_SI4713 is not set
-# CONFIG_USB_MR800 is not set
-# CONFIG_USB_DSBR is not set
-# CONFIG_RADIO_MAXIRADIO is not set
-# CONFIG_RADIO_SHARK is not set
-# CONFIG_RADIO_SHARK2 is not set
-# CONFIG_USB_KEENE is not set
-# CONFIG_USB_RAREMONO is not set
-# CONFIG_USB_MA901 is not set
-# CONFIG_RADIO_TEA5764 is not set
-# CONFIG_RADIO_SAA7706H is not set
-# CONFIG_RADIO_TEF6862 is not set
-# CONFIG_RADIO_WL1273 is not set
 
 #
 # Texas Instruments WL128x FM driver (ST based)
@@ -2415,75 +2378,12 @@ CONFIG_RADIO_ADAPTERS=y
 # CONFIG_RADIO_WL128X is not set
 # CONFIG_RADIO_IRIS is not set
 CONFIG_RADIO_SILABS=y
-# CONFIG_CYPRESS_FIRMWARE is not set
 
 #
 # Media ancillary drivers (tuners, sensors, i2c, frontends)
 #
 CONFIG_MEDIA_SUBDRV_AUTOSELECT=y
 CONFIG_MEDIA_ATTACH=y
-
-#
-# Audio decoders, processors and mixers
-#
-
-#
-# RDS decoders
-#
-
-#
-# Video decoders
-#
-
-#
-# Video and audio decoders
-#
-
-#
-# Video encoders
-#
-
-#
-# Camera sensor devices
-#
-
-#
-# Flash devices
-#
-
-#
-# Video improvement chips
-#
-
-#
-# Audio/Video compression chips
-#
-
-#
-# Miscellaneous helper chips
-#
-
-#
-# Sensors used on soc_camera driver
-#
-
-#
-# soc_camera sensor drivers
-#
-# CONFIG_SOC_CAMERA_IMX074 is not set
-# CONFIG_SOC_CAMERA_MT9M001 is not set
-# CONFIG_SOC_CAMERA_MT9M111 is not set
-# CONFIG_SOC_CAMERA_MT9T031 is not set
-# CONFIG_SOC_CAMERA_MT9T112 is not set
-# CONFIG_SOC_CAMERA_MT9V022 is not set
-# CONFIG_SOC_CAMERA_OV2640 is not set
-# CONFIG_SOC_CAMERA_OV5642 is not set
-# CONFIG_SOC_CAMERA_OV6650 is not set
-# CONFIG_SOC_CAMERA_OV772X is not set
-# CONFIG_SOC_CAMERA_OV9640 is not set
-# CONFIG_SOC_CAMERA_OV9740 is not set
-# CONFIG_SOC_CAMERA_RJ54N1 is not set
-# CONFIG_SOC_CAMERA_TW9910 is not set
 CONFIG_MEDIA_TUNER=y
 CONFIG_MEDIA_TUNER_SIMPLE=y
 CONFIG_MEDIA_TUNER_TDA8290=y
@@ -2529,53 +2429,6 @@ CONFIG_FB_CMDLINE=y
 CONFIG_FB_CFB_FILLRECT=y
 CONFIG_FB_CFB_COPYAREA=y
 CONFIG_FB_CFB_IMAGEBLIT=y
-# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
-# CONFIG_FB_SYS_FILLRECT is not set
-# CONFIG_FB_SYS_COPYAREA is not set
-# CONFIG_FB_SYS_IMAGEBLIT is not set
-# CONFIG_FB_FOREIGN_ENDIAN is not set
-# CONFIG_FB_SYS_FOPS is not set
-# CONFIG_FB_SVGALIB is not set
-# CONFIG_FB_MACMODES is not set
-# CONFIG_FB_BACKLIGHT is not set
-# CONFIG_FB_MODE_HELPERS is not set
-# CONFIG_FB_TILEBLITTING is not set
-
-#
-# Frame buffer hardware drivers
-#
-# CONFIG_FB_CIRRUS is not set
-# CONFIG_FB_PM2 is not set
-# CONFIG_FB_ARMCLCD is not set
-# CONFIG_FB_CYBER2000 is not set
-# CONFIG_FB_ASILIANT is not set
-# CONFIG_FB_IMSTT is not set
-# CONFIG_FB_OPENCORES is not set
-# CONFIG_FB_S1D13XXX is not set
-# CONFIG_FB_NVIDIA is not set
-# CONFIG_FB_RIVA is not set
-# CONFIG_FB_I740 is not set
-# CONFIG_FB_MATROX is not set
-# CONFIG_FB_RADEON is not set
-# CONFIG_FB_ATY128 is not set
-# CONFIG_FB_ATY is not set
-# CONFIG_FB_S3 is not set
-# CONFIG_FB_SAVAGE is not set
-# CONFIG_FB_SIS is not set
-# CONFIG_FB_NEOMAGIC is not set
-# CONFIG_FB_KYRO is not set
-# CONFIG_FB_3DFX is not set
-# CONFIG_FB_VOODOO1 is not set
-# CONFIG_FB_VT8623 is not set
-# CONFIG_FB_TRIDENT is not set
-# CONFIG_FB_ARK is not set
-# CONFIG_FB_PM3 is not set
-# CONFIG_FB_CARMINE is not set
-# CONFIG_FB_SMSCUFX is not set
-# CONFIG_FB_UDL is not set
-# CONFIG_FB_VIRTUAL is not set
-# CONFIG_FB_METRONOME is not set
-# CONFIG_FB_MB862XX is not set
 CONFIG_FB_MSM=y
 # CONFIG_FB_BROADSHEET is not set
 # CONFIG_FB_AUO_K190X is not set
@@ -3388,7 +3241,7 @@ CONFIG_POWERSUSPEND=y
 CONFIG_ALUCARD_HOTPLUG=y
 CONFIG_ALUCARD_HOTPLUG_USE_CPU_UTIL=y
 CONFIG_ADRENO_IDLER=y
-CONFIG_KSM=n
+CONFIG_KSM=y
 CONFIG_QNS_SYSTEM=y
 CONFIG_CPU_FREQ_GOV_DARKNESSV5=y
 CONFIG_CPU_FREQ_GOV_IMPULSE=y
