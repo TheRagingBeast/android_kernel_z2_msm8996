@@ -722,7 +722,6 @@ static int put_v4l2_ext_controls32(struct file *file,
 	int n = kp->count;
 	compat_caddr_t p;
 
-<<<<<<< HEAD
 	if (!access_ok(VERIFY_WRITE, up, sizeof(struct v4l2_ext_controls32)) ||
 		put_user(kp->ctrl_class, &up->ctrl_class) ||
 		put_user(kp->count, &up->count) ||
@@ -730,18 +729,6 @@ static int put_v4l2_ext_controls32(struct file *file,
 		copy_to_user(up->reserved, kp->reserved, sizeof(up->reserved)))
 			return -EFAULT;
 	if (!kp->count)
-=======
-	if (!access_ok(VERIFY_WRITE, up, sizeof(*up)) ||
-	    assign_in_user(&up->ctrl_class, &kp->ctrl_class) ||
-	    get_user(count, &kp->count) ||
-	    put_user(count, &up->count) ||
-	    assign_in_user(&up->error_idx, &kp->error_idx) ||
-	    copy_in_user(up->reserved, kp->reserved, sizeof(up->reserved)) ||
-	    get_user(kcontrols, &kp->controls))
-		return -EFAULT;
-
-	if (!count || count > (U32_MAX/sizeof(*ucontrols)))
->>>>>>> 77edeac403e6... media: v4l2-compat-ioctl32: prevent go past max size
 		return 0;
 
 	if (get_user(p, &up->controls))
