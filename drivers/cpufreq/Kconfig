@@ -125,6 +125,11 @@ config CPU_FREQ_DEFAULT_GOV_DARKNESS
         bool "darkness"
         select CPU_FREQ_GOV_DARKNESS
         help
+	
+config CPU_FREQ_DEFAULT_GOV_HYPERX
+        bool "HYPERX"
+        select CPU_FREQ_GOV_HYPERX
+        help
 
 config CPU_FREQ_DEFAULT_GOV_DARKNESSV5
         bool "darknessv5"
@@ -286,6 +291,10 @@ config CPU_FREQ_GOV_DARKNESSV5
 config CPU_FREQ_GOV_BIOSHOCK
 	tristate "'bioshock' cpufreq bioshock"
 	depends on CPU_FREQ
+	
+config CPU_FREQ_GOV_HYPERX
+        tristate "'HYPERX' cpufreq governor"
+        depends on CPU_FREQ
 
 config CPU_FREQ_GOV_IMPULSE
 	tristate "'impulse' cpufreq policy governor"
