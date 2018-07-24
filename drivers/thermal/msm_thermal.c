@@ -144,7 +144,7 @@ reschedule:
 	schedule_delayed_work_on(0, &check_temp_work, msecs_to_jiffies(250));
 }
 
-static int __devinit msm_thermal_dev_probe(struct platform_device *pdev)
+static int msm_thermal_dev_probe(struct platform_device *pdev)
 {
 	int ret = 0;
 	struct device_node *node = pdev->dev.of_node;
