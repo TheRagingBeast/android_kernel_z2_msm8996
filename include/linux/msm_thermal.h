@@ -24,10 +24,6 @@
 #define CPU1_DEVICE     "cpu1"
 #define CPU2_DEVICE     "cpu2"
 #define CPU3_DEVICE     "cpu3"
-#define CPU4_DEVICE     "cpu4"
-#define CPU5_DEVICE     "cpu5"
-#define CPU6_DEVICE     "cpu6"
-#define CPU7_DEVICE     "cpu7"
 #define CPUFREQ_MAX_NO_MITIGATION     UINT_MAX
 #define CPUFREQ_MIN_NO_MITIGATION     0
 #define HOTPLUG_NO_MITIGATION(_mask)  cpumask_clear(_mask)
@@ -153,8 +149,6 @@ struct device_clnt_data {
 };
 
 #ifdef CONFIG_THERMAL_MONITOR
-extern int msm_thermal_init(struct msm_thermal_data *pdata);
-extern int msm_thermal_device_init(void);
 extern int msm_thermal_set_frequency(uint32_t cpu, uint32_t freq,
 	bool is_max);
 extern int msm_thermal_set_cluster_freq(uint32_t cluster, uint32_t freq,
@@ -254,14 +248,6 @@ extern void devmgr_unregister_mitigation_client(
 					struct device *dev,
 					struct device_clnt_data *clnt);
 #else
-static inline int msm_thermal_init(struct msm_thermal_data *pdata)
-{
-	return -ENOSYS;
-}
-static inline int msm_thermal_device_init(void)
-{
-	return -ENOSYS;
-}
 static inline int msm_thermal_set_frequency(uint32_t cpu, uint32_t freq,
 	bool is_max)
 {
