@@ -38,7 +38,7 @@
 
 #define QPNP_FG_SOC_CHANGED_EVENT
 #define SUPPORT_BATT_TEMP_FLOAT_ALGO
-#define SUPPORT_BATT_SOC_CMDLINE
+//#define SUPPORT_BATT_SOC_CMDLINE
 #define SUPPORT_BATT_ID_RECHECK
 #define SUPPORT_CALL_POWER_OP
 #define SUPPORT_SOC_SHOW_OPTIMIZATION
@@ -2250,16 +2250,11 @@ static int bound_soc(int soc)
 
 static int soc_remap(struct fg_chip *chip, int soc)
 {
-        int mapped_soc = 0;
+       int mapped_soc = 0;
 
-        if(soc >= 90)
-        {
-                mapped_soc = bound_soc(soc + 1);
-        } else {
-                mapped_soc = bound_soc(soc);
-	}
+       mapped_soc = bound_soc(soc);
 
-	return mapped_soc;
+       return mapped_soc;
 }
 
 static int soc_show_op(struct fg_chip *chip, int msoc)
@@ -8284,8 +8279,9 @@ static int fg_common_hw_init(struct fg_chip *chip)
 		}
 	}
 
-	rc = fg_mem_masked_write(chip, settings[FG_MEM_DELTA_SOC].address, 0xFF, 1,
-			settings[FG_MEM_DELTA_SOC].offset);
+	rc = fg_mem_masked_write(chip, settings[FG_MEM_DELTA_SOC].address, 0xFF, 
+				 settings[FG_MEM_DELTA_SOC].value,
+				 settings[FG_MEM_DELTA_SOC].offset);
 	if (rc) {
 		pr_err("failed to write delta soc rc=%d\n", rc);
 		return rc;
