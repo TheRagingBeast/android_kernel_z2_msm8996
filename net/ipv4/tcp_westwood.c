@@ -43,8 +43,10 @@ struct westwood {
 };
 
 /* TCP Westwood functions and constants */
-#define TCP_WESTWOOD_RTT_MIN   (HZ/18)	/* 50ms */
-#define TCP_WESTWOOD_INIT_RTT  (18*HZ)	/* maybe too conservative?! */
+int tcp_westwood_rtt_min = 38;
+int tcp_westwood_init_rtt = 800;
+module_param_named(rtt_min, tcp_westwood_rtt_min, int, 0644);
+module_param_named(rtt_init, msecs_to_jiffies(tcp_westwood_init_rtt), int, 0644);
 
 /*
  * @tcp_westwood_create
@@ -52,7 +54,7 @@ struct westwood {
  * it is called after the initial SYN, so the sequence numbers
  * are correct but new passive connections we have no
  * information about RTTmin at this time so we simply set it to
- * TCP_WESTWOOD_INIT_RTT. This value was chosen to be too conservative
+ * msecs_to_jiffies(tcp_westwood_init_rtt). This value was chosen to be too conservative
  * since in this way we're sure it will be updated in a consistent
  * way as soon as possible. It will reasonably happen within the first
  * RTT period of the connection lifetime.
@@ -67,8 +69,8 @@ static void tcp_westwood_init(struct sock *sk)
 	w->accounted = 0;
 	w->cumul_ack = 0;
 	w->reset_rtt_min = 1;
-	w->rtt_min = w->rtt = TCP_WESTWOOD_INIT_RTT;
-	w->rtt_win_sx = tcp_time_stamp;
+	w->rtt_min = w->rtt = msecs_to_jiffies(tcp_westwood_init_rtt);
+	w->rtt_win_sx = tcp_jiffies32;
 	w->snd_una = tcp_sk(sk)->snd_una;
 	w->first_ack = 1;
 }
@@ -115,7 +117,7 @@ static void tcp_westwood_pkts_acked(struct sock *sk, u32 cnt, s32 rtt)
 static void westwood_update_window(struct sock *sk)
 {
 	struct westwood *w = inet_csk_ca(sk);
-	s32 delta = tcp_time_stamp - w->rtt_win_sx;
+	s32 delta = tcp_jiffies32 - w->rtt_win_sx;
 
 	/* Initialize w->snd_una with the first acked sequence number in order
 	 * to fix mismatch between tp->snd_una and w->snd_una for the first
@@ -139,7 +141,7 @@ static void westwood_update_window(struct sock *sk)
 		westwood_filter(w, delta);
 
 		w->bk = 0;
-		w->rtt_win_sx = tcp_time_stamp;
+		w->rtt_win_sx = tcp_jiffies32;
 	}
 }
 

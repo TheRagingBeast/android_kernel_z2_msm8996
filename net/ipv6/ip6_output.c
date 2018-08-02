@@ -532,6 +532,8 @@ static void ip6_copy_metadata(struct sk_buff *to, struct sk_buff *from)
 	skb_dst_set(to, dst_clone(skb_dst(from)));
 	to->dev = from->dev;
 	to->mark = from->mark;
+	
+	skb_copy_hash(to, from);
 
 #ifdef CONFIG_NET_SCHED
 	to->tc_index = from->tc_index;
