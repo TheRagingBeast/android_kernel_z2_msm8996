@@ -45,8 +45,6 @@ struct westwood {
 /* TCP Westwood functions and constants */
 int tcp_westwood_rtt_min = 38;
 int tcp_westwood_init_rtt = 800;
-module_param(rtt_min, tcp_westwood_rtt_min, int, 0644);
-module_param(rtt_init, msecs_to_jiffies(tcp_westwood_init_rtt), int, 0644);
 
 /*
  * @tcp_westwood_create
