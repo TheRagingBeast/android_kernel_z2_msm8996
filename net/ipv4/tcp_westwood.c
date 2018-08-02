@@ -45,8 +45,8 @@ struct westwood {
 /* TCP Westwood functions and constants */
 int tcp_westwood_rtt_min = 38;
 int tcp_westwood_init_rtt = 800;
-module_param_named(rtt_min, tcp_westwood_rtt_min, int, 0644);
-module_param_named(rtt_init, msecs_to_jiffies(tcp_westwood_init_rtt), int, 0644);
+module_param(rtt_min, tcp_westwood_rtt_min, int, 0644);
+module_param(rtt_init, msecs_to_jiffies(tcp_westwood_init_rtt), int, 0644);
 
 /*
  * @tcp_westwood_create
@@ -137,7 +137,7 @@ static void westwood_update_window(struct sock *sk)
 	 * Obviously on a LAN we reasonably will always have
 	 * right_bound = left_bound + WESTWOOD_RTT_MIN
 	 */
-	if (w->rtt && delta > max_t(u32, w->rtt, TCP_WESTWOOD_RTT_MIN)) {
+	if (w->rtt && delta > max_t(u32, w->rtt, msecs_to_jiffies(tcp_westwood_rtt_min))) {
 		westwood_filter(w, delta);
 
 		w->bk = 0;
