@@ -163,7 +163,7 @@ static inline bool llist_empty(const struct llist_head *head)
 
 static inline bool llist_empty_relaxed(const struct llist_head *head)
 {
-	return (void *)cpu_relaxed_read_long(&head->first) == NULL;
+	return cpu_relaxed_read_long(&head->first) == NULL;
 }
 
 static inline struct llist_node *llist_next(struct llist_node *node)
