@@ -17,7 +17,6 @@
 #include <linux/of_device.h>
 #include <linux/delay.h>
 #include <linux/of_coresight.h>
-#include <linux/input.h>
 #include <soc/qcom/scm.h>
 
 #include <linux/msm-bus-board.h>
