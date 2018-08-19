@@ -342,14 +342,14 @@ static inline void vos_get_boottime_ts(struct timespec *ts)
         cnss_get_boottime(ts);
 }
 
-static inline void vos_set_cc_source(enum cnss_cc_src cc_source)
-{
-	cnss_set_cc_source(cc_source);
-}
-
 static inline enum cnss_cc_src vos_get_cc_source(void)
 {
 	return cnss_get_cc_source();
+}
+
+static inline void vos_set_cc_source(enum cnss_cc_src cc_source)
+{
+	cnss_set_cc_source(cc_source);
 }
 
 #ifdef HIF_SDIO
