@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2016 The Linux Foundation. All rights reserved.
+ * Copyright (c) 2011-2018 The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -40,8 +40,7 @@
 #include "wniApi.h"
 #include "sirApi.h"
 #include "aniGlobal.h"
-#include "wniCfgSta.h"
-
+#include "wni_cfg.h"
 #include "utilsApi.h"
 #include "limTypes.h"
 #include "limUtils.h"
@@ -113,18 +112,17 @@ limProcessDisassocFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession
     }
 
     if (LIM_IS_STA_ROLE(psessionEntry) &&
-        (eLIM_SME_WT_DISASSOC_STATE == psessionEntry->limSmeState)) {
-        if (pHdr->fc.retry > 0) {
-            /*
-             * This can happen when first disassoc frame is received
-             * but ACK from this STA is lost, in this case 2nd disassoc frame is
-             * already in transmission queue
-             */
-            PELOGE(limLog(pMac, LOGE,
-                   FL("AP is sending disassoc after ACK lost..."));)
-            return;
+        ((eLIM_SME_WT_DISASSOC_STATE == psessionEntry->limSmeState) ||
+         (eLIM_SME_WT_DEAUTH_STATE == psessionEntry->limSmeState))) {
+        /*Every 15th deauth frame will be logged in kmsg*/
+        if(!(psessionEntry->disassocmsgcnt & 0xF)) {
+                limLog(pMac, LOGE,
+                       FL("Already processing previously received DEAUTH/Disassoc..Dropping this.. Deauth Failed cnt %d"),
+                       ++psessionEntry->disassocmsgcnt);
+        } else {
+            psessionEntry->disassocmsgcnt++;
         }
-
+        return;
     }
 
 
@@ -299,6 +297,15 @@ limProcessDisassocFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession
         return;
     }
 
+#ifdef FEATURE_WLAN_TDLS
+    /* Delete all the TDLS peers only if Disassoc is received from the AP */
+    if ((LIM_IS_STA_ROLE(psessionEntry)) &&
+        ((pStaDs->mlmStaContext.mlmState == eLIM_MLM_LINK_ESTABLISHED_STATE) ||
+        (pStaDs->mlmStaContext.mlmState == eLIM_MLM_IDLE_STATE)) &&
+        (IS_CURRENT_BSSID(pMac, pHdr->sa, psessionEntry)))
+        limDeleteTDLSPeers(pMac, psessionEntry);
+#endif
+
     if (pStaDs->mlmStaContext.mlmState != eLIM_MLM_LINK_ESTABLISHED_STATE)
     {
         /**
@@ -328,6 +335,13 @@ limProcessDisassocFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession
 
     /* Update PE session Id  */
     mlmDisassocInd.sessionId = psessionEntry->peSessionId;
+
+    /*
+     * reset the deauthMsgCnt here since we are able to Process
+     * the deauth frame and sending up the indication as well
+     */
+     if (psessionEntry->disassocmsgcnt != 0)
+         psessionEntry->disassocmsgcnt = 0;
 
     if (limIsReassocInProgress(pMac,psessionEntry)) {
 
