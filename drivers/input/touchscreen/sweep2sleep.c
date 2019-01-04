@@ -1,5 +1,5 @@
 #include <linux/module.h>
-#include <linux/kernel.h>    
+#include <linux/kernel.h>
 #include <linux/init.h>
 #include <linux/input.h>
 #include <linux/delay.h>
@@ -16,14 +16,14 @@ MODULE_LICENSE("GPL");
 
 //sweep2sleep
 #define S2S_PWRKEY_DUR         60
-#define S2S_Y_MAX             	2280
+#define S2S_Y_MAX             	1920
 #define S2S_Y_LIMIT            S2S_Y_MAX-100
 #define SWEEP_RIGHT		0x01
 #define SWEEP_LEFT		0x02
 #define VIB_STRENGTH		20
 
 // 1=sweep right, 2=sweep left, 3=both
-static int s2s_switch = 0;
+static int s2s_switch = 2;
 static int s2s_y_limit = S2S_Y_LIMIT;
 static int touch_x = 0, touch_y = 0, firstx = 0;
 static bool touch_x_called = false, touch_y_called = false;
@@ -53,6 +53,7 @@ static DECLARE_WORK(sweep2sleep_presspwr_work, sweep2sleep_presspwr);
 
 /* PowerKey trigger */
 static void sweep2sleep_pwrtrigger(void) {
+	//set_vibrate(20);
 	schedule_work(&sweep2sleep_presspwr_work);
         return;
 }
@@ -249,10 +250,10 @@ static ssize_t sweep2sleep_dump(struct device *dev,
 		return ret;
 
 	if (input < 0 || input > 3)
-		input = 0;				
+		input = 0;
 
-	s2s_switch = input;			
-	
+	s2s_switch = input;
+
 	return count;
 }
 
